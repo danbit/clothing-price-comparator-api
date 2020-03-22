@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: [
     'regenerator-runtime/runtime',
-    './src/index.js'
+    './src/server.js'
   ],
   target: 'node',
   devtool: 'source-map',

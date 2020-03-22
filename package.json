@@ -2,7 +2,7 @@
   "name": "clothing-price-comparator-api",
   "version": "1.0.0",
   "description": "API to compare clothing prices",
-  "main": "src/index.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=development",
