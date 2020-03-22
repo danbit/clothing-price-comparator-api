@@ -1,0 +1,48 @@
+{
+  "name": "clothing-price-comparator-api",
+  "version": "1.0.0",
+  "description": "API to compare clothing prices",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=development",
+    "start": "npm-run-all --parallel watch:server watch:build",
+    "watch:build": "webpack --mode=development --watch",
+    "watch:server": "nodemon --inspect=\"9229\" \"./dist/index.bundle.js\" --watch \"./dist\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danbit/clothing-price-comparator-api.git"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "node",
+    "crawler"
+  ],
+  "author": "Danilo Bitencourt",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/danbit/clothing-price-comparator-api/issues"
+  },
+  "homepage": "https://github.com/danbit/clothing-price-comparator-api#readme",
+  "devDependencies": {
+    "@sucrase/webpack-loader": "^2.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.0",
+    "regenerator-runtime": "^0.13.5",
+    "sucrase": "^3.12.1",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
