@@ -43,6 +43,9 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "dotenv": "^8.2.0"
+    "cheerio": "^1.0.0-rc.3",
+    "dotenv": "^8.2.0",
+    "moment": "^2.24.0",
+    "simplecrawler": "^1.1.8"
   }
 }

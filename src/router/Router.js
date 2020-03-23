@@ -12,8 +12,6 @@ export default class Router {
       (r) => r.method === this.req.method && r.url === this.req.url
     )
 
-    console.log('foundedRoute', foundedRoute)
-
     if (foundedRoute) {
       const { query } = url.parse(this.req.url, true)
 
@@ -22,7 +20,10 @@ export default class Router {
 
     return responseError(
       this.res,
-      new Error(`Unknown method '${this.req.method}`, HTTP_STATUS.NOT_FOUND)
+      new Error(
+        `Unknown method '${this.req.method}_${this.req.url}'`,
+        HTTP_STATUS.NOT_FOUND
+      )
     )
   }
 }
