@@ -5,7 +5,7 @@ import { HTTP_STATUS } from '../helpers/httpHelper'
 export default [
   {
     method: 'GET',
-    url: '/products',
+    url: '/api/products',
     handler: productController.getAll.bind(productController),
   },
   {
