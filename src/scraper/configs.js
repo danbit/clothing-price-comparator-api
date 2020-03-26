@@ -1,3 +1,5 @@
+import { regexHelper } from "../helpers";
+
 export default [
   {
     initialUrl: 'https://www.vkmodaplussize.com.br/plus-size/',
@@ -7,7 +9,7 @@ export default [
         name: 'a',
         url: {
           selector: 'a',
-          attr: "href"
+          attr: 'href',
         },
       },
     },
@@ -17,23 +19,27 @@ export default [
         name: '.ProductDetails h2 a',
         url: {
           selector: '.ProductDetails h2 a',
-          attr: "href"
+          attr: 'href',
         },
         image: {
           selector: '.ProductImageContent a img',
-          attr: "data-original"
+          attr: 'data-original',
         },
-        price: '.ProductPrices .prod_valor .prod_valor_preco .ValorProduto',
+        price:{
+          selector: '.ProductPrices .prod_valor .prod_valor_preco .ValorProduto',
+          convert: p => p ? Number.parseFloat(regexHelper.matchPrice(p)) : 0.0,
+        },
         sizes: {
-          listItem: '.onHover.t-store .productVariations .options.option_tamanho li',
-          attr: 'title'
+          listItem:
+            '.onHover.t-store .productVariations .options.option_tamanho li',
+          attr: 'title',
         },
       },
     },
     details: {
       description: {
         selector: '#ProductDescription p',
-        how: 'html'
+        how: 'html',
       },
     },
   },
@@ -48,7 +54,7 @@ export default [
         },
         url: {
           selector: 'a',
-          attr: "href"
+          attr: 'href',
         },
       },
     },
@@ -58,24 +64,28 @@ export default [
         name: '.info-produto a.nome-produto',
         url: {
           selector: '.info-produto a.nome-produto',
-          attr: "href"
+          attr: 'href',
         },
         image: {
           selector: '.imagem-produto img',
-          attr: "src"
+          attr: 'src',
         },
-        price: '.info-produto .preco-produto strong.preco-venda',
-        pricePromotional: '.info-produto .preco-produto strong.preco-promocional',
+        price: {
+          selector: '.info-produto .preco-produto strong.preco-venda',
+          convert: p => p ? Number.parseFloat(regexHelper.matchPrice(p)) : 0.0,
+        },
+        pricePromotional:
+          '.info-produto .preco-produto strong.preco-promocional',
       },
     },
     details: {
       description: {
         selector: '#descricao p',
-        how: 'html'
+        how: 'html',
       },
       sizes: {
         listItem: 'a.atributo-item span',
       },
-    }
+    },
   },
 ]

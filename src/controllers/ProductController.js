@@ -1,9 +1,9 @@
-import { responseSuccess, responseError } from '../helpers/httpHelper'
+import { httpHelper } from '../helpers'
 
 class ProductController {
   // GET /products
   async getAll(_req, res) {
-    responseSuccess(res, [])
+    httpHelper.responseSuccess(res, [])
   }
 }
 
