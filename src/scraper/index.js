@@ -13,15 +13,18 @@ const getPlusSizeCategories = async ({ initialUrl, categories }) =>
       })
   )
 
-const getProductsByCategory = async (category, { products }) =>
+const getProductsByCategory = async (url, categoryName, { products }) =>
   new Promise((resolve, reject) =>
-    scrapeIt(category.url, {
+    scrapeIt(url, {
       products,
     })
       .then(({ data }) => {
         resolve(
           data.products.map((p) => {
-            p.category = category
+            p.category = {
+              url,
+              name: categoryName,
+            }
             return p
           })
         )

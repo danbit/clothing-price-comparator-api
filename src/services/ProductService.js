@@ -1,14 +1,14 @@
-import ProductModel from "../models/products"
+import ProductModel from '../models/products'
 
 export default class ProductService {
-
   async save(product) {
     if (!product) return
 
     const query = { name: product.name, 'category.url': product.category.url }
 
     try {
-      await ProductModel.findOneAndUpdate(query,
+      await ProductModel.findOneAndUpdate(
+        query,
         { ...product },
         { upsert: true }
       ).exec()
@@ -20,14 +20,16 @@ export default class ProductService {
   async findByCategory(category) {
     if (!category) return []
 
-    const query = { 'category.url': product.category.url }
+    let products = []
+    const query = { 'category.name': { $regex: new RegExp(category, 'i') } }
 
     try {
-      return await ProductModel.find(query).sort({'price': -1}).limit(10).exec()
+      products = await ProductModel.find(query).sort({ price: -1 }).limit(10)
+      console.log(products)
     } catch (error) {
-      console.log(`Erro to save product ${product.name}`, error)
+      console.log(`Erro to find products from category ${category}`, error)
     }
 
-    return []
+    return products
   }
 }

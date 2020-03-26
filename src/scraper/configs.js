@@ -1,8 +1,10 @@
-import { regexHelper } from "../helpers";
+import { regexHelper } from '../helpers'
 
 export default [
   {
     initialUrl: 'https://www.vkmodaplussize.com.br/plus-size/',
+    categoryPageParam: '?page=',
+    maxPage: 3,
     categories: {
       listItem: '.filterBox li.LastChild',
       data: {
@@ -25,9 +27,11 @@ export default [
           selector: '.ProductImageContent a img',
           attr: 'data-original',
         },
-        price:{
-          selector: '.ProductPrices .prod_valor .prod_valor_preco .ValorProduto',
-          convert: p => p ? Number.parseFloat(regexHelper.matchPrice(p)) : 0.0,
+        price: {
+          selector:
+            '.ProductPrices .prod_valor .prod_valor_preco .ValorProduto',
+          convert: (p) =>
+            p ? Number.parseFloat(regexHelper.matchPrice(p)) : 0.0,
         },
         sizes: {
           listItem:
@@ -45,6 +49,8 @@ export default [
   },
   {
     initialUrl: 'https://www.distritomoda.com.br/plus-size',
+    categoryPageParam: '?pagina=',
+    maxPage: 3,
     categories: {
       listItem: '.menu.lateral .nivel-um ul.nivel-dois li',
       data: {
@@ -72,7 +78,8 @@ export default [
         },
         price: {
           selector: '.info-produto .preco-produto strong.preco-venda',
-          convert: p => p ? Number.parseFloat(regexHelper.matchPrice(p)) : 0.0,
+          convert: (p) =>
+            p ? Number.parseFloat(regexHelper.matchPrice(p)) : 0.0,
         },
         pricePromotional:
           '.info-produto .preco-produto strong.preco-promocional',

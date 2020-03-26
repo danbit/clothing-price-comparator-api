@@ -38,6 +38,11 @@ const schema = new Mongoose.Schema(
   { timestamps: true }
 )
 
+schema.index(
+  { name: 'text' },
+  { name: 'name_text_index', language: 'portuguese' }
+)
+
 schema.method('mapToProduct', () => {
   const product = this.toObject()
 

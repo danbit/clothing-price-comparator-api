@@ -8,9 +8,15 @@ export default class Router {
   }
 
   async processRouters(routes) {
-    const foundedRoute = routes.find(
-      (r) => r.method === this.req.method && r.url === this.req.url
-    )
+    const foundedRoute = routes.find((r) => {
+      if (r.method !== this.req.method) {
+        return false
+      }
+
+      return r.url instanceof Object
+        ? this.req.url.match(r.url)
+        : this.req.url === r.url
+    })
 
     if (foundedRoute) {
       const { query } = url.parse(this.req.url, true)

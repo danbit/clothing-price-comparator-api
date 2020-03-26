@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose'
-import { configHelper } from '.'
+import configHelper from './configHelper'
 
 const config = {
   uri: configHelper.database.mongodb.uri,
@@ -10,14 +10,17 @@ const config = {
   },
 }
 
-const connect = () => new Promise((resolve, reject) => {
-  mongoose.connect(config.uri, config.options)
-    .then(() => {
-      /* Debug */
-      resolve(`MongoDB connected at ${config.uri}`)
-    }, (error) => {
-      reject(error)
-    })
-})
+const connect = () =>
+  new Promise((resolve, reject) => {
+    mongoose.connect(config.uri, config.options).then(
+      () => {
+        /* Debug */
+        resolve(`MongoDB connected at ${config.uri}`)
+      },
+      (error) => {
+        reject(error)
+      }
+    )
+  })
 
 export { connect }
