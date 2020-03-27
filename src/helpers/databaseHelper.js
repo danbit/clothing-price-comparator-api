@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose'
 import configHelper from './configHelper'
 
 const config = {
-  uri: configHelper.database.mongodb.uri,
+  uri: configHelper.mongodb.uri,
   options: {
     useNewUrlParser: true,
     useFindAndModify: false,

@@ -12,6 +12,7 @@ const schema = new Mongoose.Schema(
     },
     image: {
       type: String,
+      default: 'https://media.defense.gov/2019/Jul/30/2002164249/-1/-1/0/190730-A-HG995-1002.PNG',
       required: true,
     },
     price: {
@@ -38,11 +39,6 @@ const schema = new Mongoose.Schema(
   { timestamps: true }
 )
 
-schema.index(
-  { name: 'text' },
-  { name: 'name_text_index', language: 'portuguese' }
-)
-
 schema.method('mapToProduct', () => {
   const product = this.toObject()
 
@@ -54,6 +50,11 @@ schema.method('mapToProduct', () => {
   return product
 })
 
-const ProductModel = Mongoose.model('Products', schema)
+const ProductModel = Mongoose.model('products', schema)
+
+ProductModel.collection.createIndex(
+  { 'name': 'text', 'category.name': 'text' },
+  { 'name': 'product_text_index', 'background': true, 'weights': { 'name': 3, 'category.name': 5 }, 'default_language': 'portuguese' }
+)
 
 export default ProductModel

@@ -4,7 +4,7 @@ export default [
   {
     initialUrl: 'https://www.vkmodaplussize.com.br/plus-size/',
     categoryPageParam: '?page=',
-    maxPage: 3,
+    maxPage: 10,
     categories: {
       listItem: '.filterBox li.LastChild',
       data: {
@@ -50,7 +50,7 @@ export default [
   {
     initialUrl: 'https://www.distritomoda.com.br/plus-size',
     categoryPageParam: '?pagina=',
-    maxPage: 3,
+    maxPage: 10,
     categories: {
       listItem: '.menu.lateral .nivel-um ul.nivel-dois li',
       data: {
@@ -81,8 +81,11 @@ export default [
           convert: (p) =>
             p ? Number.parseFloat(regexHelper.matchPrice(p)) : 0.0,
         },
-        pricePromotional:
-          '.info-produto .preco-produto strong.preco-promocional',
+        pricePromotional: {
+          selector: '.info-produto .preco-produto strong.preco-promocional',
+          convert: (p) =>
+            p ? Number.parseFloat(regexHelper.matchPrice(p)) : 0.0,
+        }
       },
     },
     details: {
@@ -92,6 +95,49 @@ export default [
       },
       sizes: {
         listItem: 'a.atributo-item span',
+      },
+    },
+  },
+  {
+    initialUrl: 'https://www.posthaus.com.br/plus-size-feminino',
+    homeUrl: 'https://www.posthaus.com.br',
+    categoryPageParam: '?pag=',
+    maxPage: 10,
+    categories: {
+      listItem: 'a.sc-evWYkj.jyOlXC',
+      data: {
+        name: 'div',
+        url: {
+          attr: 'href',
+        },
+      },
+    },
+    products: {
+      listItem: '.sc-eSePXt.gkGqKy',
+      data: {
+        name: 'h4',
+        url: {
+          selector: 'a',
+          attr: 'href',
+        },
+        image: {
+          selector: '.sc-btzYZH.ehewdO',
+          attr: 'src',
+          convert: (img) => img ? img : null,
+        },
+        price: {
+          selector:
+            'label',
+          convert: (p) =>
+            p ? Number.parseFloat(regexHelper.matchPrice(p)) : 0.0,
+        },
+      },
+    },
+    details: {
+      description: 'p',
+      sizes: {
+        listItem:
+          '.sc-fnwBNb.cLizgy',
       },
     },
   },

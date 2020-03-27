@@ -5,7 +5,7 @@ import { configHelper, dataBaseHelper } from './helpers'
 import * as crawler from './crawler'
 
 (async () => {
-  //await dataBaseHelper.connect()
+  await dataBaseHelper.connect()
   crawler.init()
 })()
 
