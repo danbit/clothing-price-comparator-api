@@ -1,0 +1,14 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "log\\.68d2d167890a941af09f51fbf8aa18b3698b47e4-audit.json",
+    "files": [
+        {
+            "date": 1585344285424,
+            "name": "log\\clothing-price-comparator-api-2020-03-27.log",
+            "hash": "ca6297ac51e1205f734bd1775997c729"
+        }
+    ]
+}

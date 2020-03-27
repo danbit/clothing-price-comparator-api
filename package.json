@@ -46,6 +46,8 @@
     "cron": "^1.8.2",
     "dotenv": "^8.2.0",
     "mongoose": "^5.9.6",
-    "scrape-it": "^5.2.3"
+    "scrape-it": "^5.2.3",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
   }
 }

@@ -13,7 +13,7 @@ export default class ProductService {
         { upsert: true }
       ).exec()
     } catch (error) {
-      console.log(`Error to save product ${product.name}`, error)
+      logger.error(`Error to save product ${product.name}`, error)
     }
   }
 
@@ -22,7 +22,7 @@ export default class ProductService {
     try {
       total = await ProductModel.countDocuments({})
     } catch (error) {
-      console.log(`Error to insertMany products`, error)
+      logger.error(`Error to insertMany products`, error)
     }
 
     return total
@@ -65,7 +65,7 @@ export default class ProductService {
     try {
       data = await ProductModel.aggregate(aggregateQuery).exec()
     } catch (error) {
-      console.log(`Error to find products from category ${category}`, error)
+      logger.error(`Error to find products from category ${category}`, error)
     }
 
     return data.map((d) => d.products)

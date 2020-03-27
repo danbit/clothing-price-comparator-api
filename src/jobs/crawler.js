@@ -2,15 +2,13 @@ import { CronJob } from 'cron'
 import { configHelper } from '../helpers'
 import { clothesPlusSizeCrowler } from '../crawler'
 import ProductService from '../services/ProductService'
+import logger from '../log'
 
 const start = async () => {
-  const { cronExpression } = configHelper.jobs.crwaler
-
-  const productService = new ProductService()
-  const totalProducts = await productService.countProducts()
-
+  const totalProducts = await new ProductService().countProducts()
   const runOnInit = totalProducts === 0
 
+  const { cronExpression } = configHelper.jobs.crwaler
   const job = new CronJob(
     cronExpression,
     async () => await clothesPlusSizeCrowler.init(),
@@ -18,11 +16,13 @@ const start = async () => {
     true,
     'America/Los_Angeles',
     null,
-    runOnInit
+    runOnInit,
   )
-  job.start();
+  job.start()
 
-  console.log(`Job clothesPlusSizeCrowler will run at ${job.nextDate().format('YYYY-MM-DDTHH:mm:ss.SSS')} `);
+  logger.info(
+    `Job clothesPlusSizeCrowler will run at ${job.nextDate().format('YYYY-MM-DDTHH:mm:ss.SSS')}`
+  )
 }
 
 export { start }
