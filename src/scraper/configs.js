@@ -2,9 +2,10 @@ import { regexHelper } from '../helpers'
 
 export default [
   {
+    store: 'vkmodaplussize',
     initialUrl: 'https://www.vkmodaplussize.com.br/plus-size/',
     categoryPageParam: '?page=',
-    maxPage: 10,
+    maxPage: 1,
     categories: {
       listItem: '.filterBox li.LastChild',
       data: {
@@ -48,9 +49,10 @@ export default [
     },
   },
   {
+    store: 'distritomoda',
     initialUrl: 'https://www.distritomoda.com.br/plus-size',
     categoryPageParam: '?pagina=',
-    maxPage: 10,
+    maxPage: 1,
     categories: {
       listItem: '.menu.lateral .nivel-um ul.nivel-dois li',
       data: {
@@ -99,10 +101,11 @@ export default [
     },
   },
   {
+    store: 'posthaus',
     initialUrl: 'https://www.posthaus.com.br/plus-size-feminino',
     homeUrl: 'https://www.posthaus.com.br',
     categoryPageParam: '?pag=',
-    maxPage: 10,
+    maxPage: 1,
     categories: {
       listItem: 'a.sc-evWYkj.jyOlXC',
       data: {

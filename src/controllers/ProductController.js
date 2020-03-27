@@ -10,8 +10,7 @@ class ProductController {
   async getAll(_req, res, query) {
     let products = []
     try {
-      console.log('query', query)
-      products = this.productService.findByCategory(query.category)
+      products = await this.productService.findByCategory(query.category)
       return httpHelper.responseSuccess(res, products)
     } catch (error) {
       return httpHelper.responseError(res, error)

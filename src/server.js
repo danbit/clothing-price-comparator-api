@@ -2,11 +2,11 @@ import http from 'http'
 import Router from './router/Router'
 import routes from './router/routes'
 import { configHelper, dataBaseHelper } from './helpers'
-import * as crawler from './crawler'
+import { crawlerJob } from './jobs'
 
 (async () => {
   await dataBaseHelper.connect()
-  crawler.init()
+  await crawlerJob.start()
 })()
 
 const { hostname, port } = configHelper.app

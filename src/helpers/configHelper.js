@@ -8,9 +8,7 @@ const {
   APP_HOSTNAME,
   APP_PORT,
   MONGODB_URI,
-  ELASTICSEARCH_URL,
-  ELASTICSEARCH_REQUEST_TIMEOUT,
-  ELASTICSEARCH_INDEX
+  JOBS_CRAWLER_CRON_EXPRESSION,
 } = process.env
 
 export default {
@@ -21,9 +19,9 @@ export default {
   mongodb: {
     uri: MONGODB_URI,
   },
-  elasticsearch: {
-    url: ELASTICSEARCH_URL,
-    requestTimeout: ELASTICSEARCH_REQUEST_TIMEOUT ? Number(ELASTICSEARCH_REQUEST_TIMEOUT) : 30000,
-    index: ELASTICSEARCH_INDEX,
-  },
+  jobs: {
+    crwaler: {
+      cronExpression: JOBS_CRAWLER_CRON_EXPRESSION,
+    },
+  }
 }

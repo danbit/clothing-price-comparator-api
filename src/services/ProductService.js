@@ -13,18 +13,19 @@ export default class ProductService {
         { upsert: true }
       ).exec()
     } catch (error) {
-      console.log(`Erro to save product ${product.name}`, error)
+      console.log(`Error to save product ${product.name}`, error)
     }
   }
 
-  async insertMany(products) {
-    if (!products) return
-
+  async countProducts() {
+    let total = 0
     try {
-      await ProductModel.insertMany(products)
+      total = await ProductModel.countDocuments({})
     } catch (error) {
-      console.log(`Erro to insertMany products`, error)
+      console.log(`Error to insertMany products`, error)
     }
+
+    return total
   }
 
   async findByCategory(category) {
@@ -46,9 +47,15 @@ export default class ProductService {
         {
           _id: {
             categoryUrl: '$categoryUrl',
-            category: '$category'
+            category: '$category',
+            store: '$store',
           },
-          'products': { '$first': { name: "$name", price: "$price", url: '$url' } }
+          'products': {
+            '$first':
+            {
+              name: "$name", url: '$url', image: '$image', price: "$price", category: '$category', sizes: '$sizes', description: '$description'
+            }
+          }
         }
       },
       { '$sort': { 'price': -1 } },
@@ -57,11 +64,10 @@ export default class ProductService {
 
     try {
       data = await ProductModel.aggregate(aggregateQuery).exec()
-      console.log(data)
     } catch (error) {
-      console.log(`Erro to find products from category ${category}`, error)
+      console.log(`Error to find products from category ${category}`, error)
     }
 
-    return data
+    return data.map((d) => d.products)
   }
 }

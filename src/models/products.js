@@ -2,6 +2,10 @@ import Mongoose from 'mongoose'
 
 const schema = new Mongoose.Schema(
   {
+    store: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -38,17 +42,6 @@ const schema = new Mongoose.Schema(
   },
   { timestamps: true }
 )
-
-schema.method('mapToProduct', () => {
-  const product = this.toObject()
-
-  delete product.__v
-  delete product.createdAt
-  delete product.updatedAt
-  delete product.deletedAt
-
-  return product
-})
 
 const ProductModel = Mongoose.model('products', schema)
 
