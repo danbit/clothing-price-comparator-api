@@ -1,9 +1,10 @@
 # clothing-price-comparator-api
-API to compare clothing prices
+API to compare plus-size clothing prices
 
 ## Prerequisites
 
 * Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+* Docker - [Download & Install Docker](https://docs.docker.com/install/)
 
 ## Usage
 
@@ -21,8 +22,13 @@ npm install
 
 * `npm run watch:build` (automatic build the code)
 
+## Run
+```console
+docker-compose up
+```
+
 ## Endpoints
 
 |Method | 	Url		| 	Description |
 |-------| ------- | ----------- |
-|GET|/api/products| 	get N products (todo by category)|
+|GET|/api/products?category=| 	get 3 products, from 3 different stores, in descending order by price|

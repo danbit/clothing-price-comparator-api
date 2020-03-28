@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --detectOpenHandles",
     "test-watch": "jest --watch --detectOpenHandles",
-    "build": "webpack --mode=development",
+    "build": "webpack --mode=production --progress --profile --colors --display-error-details --display-cached",
     "start": "npm-run-all --parallel watch:server watch:build",
     "watch:build": "webpack --mode=development --watch",
     "watch:server": "nodemon --inspect=\"9229\" \"./dist/index.bundle.js\" --watch \"./dist\" "
