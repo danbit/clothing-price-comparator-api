@@ -14,7 +14,7 @@ const start = async () => {
     async () => await clothesPlusSizeCrowler.init(),
     null,
     true,
-    'America/Los_Angeles',
+    'America/Bahia',
     null,
     runOnInit,
   )

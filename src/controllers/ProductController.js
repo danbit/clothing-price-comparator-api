@@ -6,8 +6,7 @@ class ProductController {
     this.productService = new ProductService()
   }
 
-  // GET /products
-  async getAll(_req, res, query) {
+  async getByCategory(_req, res, query) {
     let products = []
     try {
       products = await this.productService.findByCategory(query.category)

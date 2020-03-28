@@ -22,7 +22,7 @@ export default {
   },
   log: {
     service: LOG_SERVICE,
-    path: NODE_ENV !== 'development' ? LOG_PATH : './log',
+    path: NODE_ENV === 'production' ? LOG_PATH : './log',
   },
   mongodb: {
     uri: MONGODB_URI,

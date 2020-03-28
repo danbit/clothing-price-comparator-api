@@ -6,7 +6,7 @@ export default [
   {
     method: 'GET',
     url: /\/api\/products(\?|&)([^=]+)=([^&]+)/gm,
-    handler: productController.getAll.bind(productController),
+    handler: productController.getByCategory.bind(productController),
   },
   {
     method: 'GET',
