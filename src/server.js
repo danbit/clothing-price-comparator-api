@@ -20,6 +20,6 @@ const server = http.createServer(async (req, res) => {
   await new Router(req, res).processRouters(routes)
 })
 
-server.listen(port, hostname, () => {
+server.listen(port, () => {
   logger.info(`🚀 Server running at http://${hostname}:${port}/`)
 })
