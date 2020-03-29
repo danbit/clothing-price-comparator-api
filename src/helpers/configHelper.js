@@ -6,7 +6,6 @@ require('dotenv').config({
 
 const {
   NODE_ENV,
-  APP_HOSTNAME,
   APP_PORT,
   MONGODB_URI,
   JOBS_CRAWLER_CRON_EXPRESSION,
@@ -17,7 +16,6 @@ const {
 export default {
   nodeEnv: NODE_ENV,
   app: {
-    hostname: APP_HOSTNAME || '127.0.0.1',
     port: APP_PORT ? parseInt(APP_PORT, 10) : 3000,
   },
   log: {
