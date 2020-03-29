@@ -14,12 +14,12 @@ import logger from './log'
   }
 })()
 
-const { hostname, port } = configHelper.app
+const { port } = configHelper.app
 
 const server = http.createServer(async (req, res) => {
   await new Router(req, res).processRouters(routes)
 })
 
 server.listen(port, () => {
-  logger.info(`🚀 Server running at http://${hostname}:${port}/`)
+  logger.info(`🚀 Server running at http://hostname:${port}/`)
 })
