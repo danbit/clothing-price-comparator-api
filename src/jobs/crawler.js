@@ -11,7 +11,7 @@ const start = async () => {
   const { cronExpression } = configHelper.jobs.crwaler
   const job = new CronJob(
     cronExpression,
-    async () => await clothesPlusSizeCrowler.init(),
+    async () => await clothesPlusSizeCrowler.init(totalProducts),
     null,
     true,
     'America/Bahia',

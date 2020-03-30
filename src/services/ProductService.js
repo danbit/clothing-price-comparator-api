@@ -1,7 +1,20 @@
 import ProductModel from '../models/products'
+import logger from '../log'
 
 export default class ProductService {
   async save(product) {
+    if (!product) return
+
+    const newProduct = new ProductModel(product)
+
+    try {
+      await newProduct.save()
+    } catch (error) {
+      logger.error(`Error to save product ${product.name}`, error)
+    }
+  }
+
+  async saveOrUpdate(product) {
     if (!product) return
 
     const query = { name: product.name, 'category.url': product.category.url }
@@ -33,19 +46,18 @@ export default class ProductService {
     let data = {}
 
     const aggregateQuery = [
-      { '$match': { '$text': { '$search': category } } },
+      { '$match': { 'category.name': { $regex: category, '$options' : 'i' } } },
       {
         '$project':
         {
-          _id: 0, name: 1, url: 1, price: 1, description: 1, sizes: 1, category: '$category.name',
-          categoryUrl: '$category.url', score: { $meta: "textScore" }
+          _id: 0, name: 1, url: 1, price: 1, description: 1,
+          sizes: 1, category: '$category.name', store: 1
         }
       },
-      { '$match': { score: { $gt: 5 } } },
       {
         '$group':
         {
-          _id: { store: '$store', },
+          _id: { store: '$store' },
           'products': {
             '$first':
             {
@@ -55,7 +67,7 @@ export default class ProductService {
           }
         }
       },
-      { '$sort': { 'price': -1 } },
+      { '$sort': { 'products.price': -1 } },
       { '$limit': 3 }
     ]
 
@@ -66,5 +78,15 @@ export default class ProductService {
     }
 
     return data.map((d) => d.products)
+  }
+
+  async insertMany(products) {
+    if (!products) return
+
+    try {
+      await ProductModel.insertMany(products)
+    } catch (error) {
+      logger.error(`Error to insert many products`, error)
+    }
   }
 }
