@@ -31,4 +31,4 @@ docker-compose up
 
 |Method | 	Url		| 	Description |
 |-------| ------- | ----------- |
-|GET|/api/products?category=| 	get 3 products, from 3 different stores, in descending order by price|
+|GET|/api/products?category=&page=&size=| 	get 3 products, from 3 different stores, in descending order by price|

@@ -6,6 +6,7 @@ export default [
     initialUrl: 'https://www.vkmodaplussize.com.br/plus-size/',
     categoryPageParam: '?page=',
     maxPage: 1,
+    timeoutDetails: 500,
     categories: {
       listItem: '.filterBox li.LastChild',
       data: {
@@ -53,6 +54,7 @@ export default [
     initialUrl: 'https://www.distritomoda.com.br/plus-size',
     categoryPageParam: '?pagina=',
     maxPage: 1,
+    timeoutDetails: 500,
     categories: {
       listItem: '.menu.lateral .nivel-um ul.nivel-dois li',
       data: {
@@ -106,6 +108,7 @@ export default [
     homeUrl: 'https://www.posthaus.com.br',
     categoryPageParam: '?pag=',
     maxPage: 1,
+    timeoutDetails: 500,
     categories: {
       listItem: 'a.sc-evWYkj.jyOlXC',
       data: {

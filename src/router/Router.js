@@ -1,4 +1,3 @@
-import url from 'url'
 import { responseError, HTTP_STATUS } from '../helpers/httpHelper'
 
 export default class Router {
@@ -19,9 +18,7 @@ export default class Router {
     })
 
     if (foundedRoute) {
-      const { query } = url.parse(this.req.url, true)
-
-      return foundedRoute.handler(this.req, this.res, query)
+      return foundedRoute.handler(this.req, this.res)
     }
 
     return responseError(

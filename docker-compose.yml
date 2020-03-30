@@ -9,7 +9,7 @@ services:
     volumes:
       - logs_d:/var/logs
     env_file:
-      - ./.env.development
+      - ./.env.local
     ports:
       - 3000:3000
     depends_on:
