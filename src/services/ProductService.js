@@ -1,3 +1,4 @@
+import { calculateLimitAndOffset, paginate } from 'paginate-info'
 import ProductModel from '../models/products'
 import logger from '../log'
 
@@ -41,43 +42,32 @@ export default class ProductService {
     return total
   }
 
-  async findByCategory(category) {
+  async findByCategory(category, page = 1, size = 3) {
     if (!category) return []
-    let data = {}
 
-    const aggregateQuery = [
-      { '$match': { 'category.name': { $regex: category, '$options' : 'i' } } },
-      {
-        '$project':
-        {
-          _id: 0, name: 1, url: 1, price: 1, description: 1,
-          sizes: 1, category: '$category.name', store: 1
-        }
-      },
-      {
-        '$group':
-        {
-          _id: { store: '$store' },
-          'products': {
-            '$first':
-            {
-              name: "$name", url: '$url', image: '$image', price: "$price",
-              category: '$category', sizes: '$sizes', description: '$description'
-            }
-          }
-        }
-      },
-      { '$sort': { 'products.price': -1 } },
-      { '$limit': 3 }
-    ]
+    let data = {}
+    const query = { 'category.name': { $regex: category, '$options': 'i' } }
 
     try {
-      data = await ProductModel.aggregate(aggregateQuery).exec()
+      const count = await ProductModel.countDocuments(query)
+      const { limit, offset } = calculateLimitAndOffset(page, size)
+
+      const rows = await ProductModel.find(query).sort({ price: -1 }).limit(limit).skip(offset).exec()
+
+      let products = rows.map(({ name, url, image, sizes, description, price, category }) => {
+        return { name, url, image, sizes, description, price, category: category.name }
+      })
+      const meta = paginate(page, count, products, size);
+
+      data = {
+        products,
+        meta,
+      }
     } catch (error) {
       logger.error(`Error to find products from category ${category}`, error)
     }
 
-    return data.map((d) => d.products)
+    return data
   }
 
   async insertMany(products) {
